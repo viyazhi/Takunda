@@ -1,4 +1,3 @@
-/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,7 +6,6 @@ body {
     color: #333;
 }
 
-/* Header */
 header {
     background-color: #007bff;
     color: white;
@@ -20,7 +18,6 @@ header h1 {
     margin: 0;
 }
 
-/* Form Styles */
 form {
     background: white;
     padding: 20px;
@@ -70,7 +67,6 @@ form button:hover {
     background-color: #0056b3;
 }
 
-/* Table Styles */
 table {
     width: 90%;
     margin: 20px auto;
@@ -96,7 +92,6 @@ table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-/* Buttons */
 button,
 a.button {
     display: inline-block;
@@ -114,7 +109,6 @@ a.button:hover {
     background-color: #0056b3;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     form,
     table {
