@@ -1,11 +1,10 @@
 <?php
-// Database Connection
+
 $conn = new mysqli('localhost', 'root', '', 'survey_system');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Create Database Tables (if not exists)
 $conn->query("
 CREATE TABLE IF NOT EXISTS surveys (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,7 +33,6 @@ CREATE TABLE IF NOT EXISTS responses (
     FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
 )");
 
-// Handle Survey Creation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_survey'])) {
     $title = $_POST['title'];
     $conn->query("INSERT INTO surveys (title) VALUES ('$title')");
@@ -51,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_survey'])) {
     exit;
 }
 
-// Handle Feedback Submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_feedback'])) {
     $survey_id = $_POST['survey_id'];
     foreach ($_POST['responses'] as $question_id => $response) {
@@ -62,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_feedback'])) {
     exit;
 }
 
-// Fetch Surveys for Display
 $surveys = $conn->query("SELECT * FROM surveys");
 
 ?>
@@ -99,8 +95,7 @@ $surveys = $conn->query("SELECT * FROM surveys");
         <button type="button" onclick="addQuestion()">Add Question</button>
         <button type="submit" name="create_survey">Create Survey</button>
     </form>
-
-    <!-- View Surveys -->
+	
     <h2>Available Surveys</h2>
     <?php while ($survey = $surveys->fetch_assoc()): ?>
         <h3><?php echo $survey['title']; ?></h3>
@@ -126,7 +121,6 @@ $surveys = $conn->query("SELECT * FROM surveys");
         </form>
     <?php endwhile; ?>
 
-    <!-- Analyze Responses -->
     <h2>Survey Analysis</h2>
     <?php
     $analysis = $conn->query("
